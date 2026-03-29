@@ -30,24 +30,99 @@ body {
 }
 
 .hero-pattern {
-	background-color: #f6f7fa;
+	position: relative;
+	overflow: hidden;
+	background-color: #f5f6fa;
+}
+
+.hero-pattern::before,
+.hero-pattern::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+
+.hero-pattern::before {
 	background-image:
-		radial-gradient(circle at 22% 12%, rgba(201, 212, 222, 0.78) 0 19%, transparent 20%),
-		radial-gradient(circle at 52% 1%, rgba(214, 190, 199, 0.6) 0 14%, transparent 15%),
-		radial-gradient(circle at 76% 12%, rgba(201, 212, 222, 0.72) 0 18%, transparent 19%),
-		radial-gradient(circle at 2% 64%, rgba(201, 212, 222, 0.65) 0 16%, transparent 17%),
-		radial-gradient(circle at 44% 58%, rgba(214, 190, 199, 0.45) 0 20%, transparent 21%),
-		radial-gradient(circle at 87% 63%, rgba(201, 212, 222, 0.65) 0 16%, transparent 17%),
-		radial-gradient(circle at 18% 100%, rgba(201, 212, 222, 0.75) 0 17%, transparent 18%),
-		radial-gradient(circle at 70% 100%, rgba(214, 190, 199, 0.56) 0 17%, transparent 18%);
-	background-size: cover;
+		url('/FlechaAzul.png'),
+		url('/FlechaAzul.png'),
+		url('/FlechaAzul.png');
+	background-repeat: no-repeat;
+	background-size: 280px auto, 250px auto, 220px auto;
+	background-position: -48px -30px, calc(100% + 52px) calc(100% + 14px), calc(100% + 34px) 70%;
+	opacity: 0.95;
+}
+
+.hero-pattern::after {
+	background-image:
+		url('/ManchaRoja.png'),
+		url('/ManchaRoja.png'),
+		linear-gradient(180deg, rgba(245, 246, 250, 0.16) 0%, rgba(245, 246, 250, 0.84) 82%);
+	background-repeat: no-repeat;
+	background-size: 210px auto, 270px auto, 100% 100%;
+	background-position: calc(100% + 30px) -18px, -58px calc(100% + 28px), center;
+	opacity: 0.98;
+}
+
+.hero-logos {
+	position: relative;
+	z-index: 11;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	margin: 1rem auto 1.4rem;
+	width: fit-content;
+}
+
+.hero-logo {
+	display: block;
+	height: 74px;
+	width: auto;
+	object-fit: contain;
+	filter: drop-shadow(0 6px 10px rgba(18, 29, 53, 0.2));
+}
+
+.hero-logo--round {
+	border-radius: 999px;
+}
+
+@media (min-width: 768px) {
+	.hero-logos {
+		position: absolute;
+		right: clamp(1rem, 4vw, 3.25rem);
+		bottom: clamp(1.25rem, 4vw, 2.25rem);
+		margin: 0;
+	}
+
+	.hero-logo {
+		height: 88px;
+	}
 }
 
 @media (max-width: 767px) {
 	.hero-pattern {
-		background-image:
-			radial-gradient(circle at 40% 8%, rgba(201, 212, 222, 0.74) 0 22%, transparent 23%),
-			radial-gradient(circle at 15% 56%, rgba(214, 190, 199, 0.44) 0 20%, transparent 21%),
-			radial-gradient(circle at 80% 68%, rgba(201, 212, 222, 0.7) 0 24%, transparent 25%);
+		min-height: 78svh;
+	}
+
+	.hero-pattern::before {
+		background-size: 210px auto, 170px auto, 140px auto;
+		background-position: -62px -36px, calc(100% + 56px) calc(100% + 20px), calc(100% + 42px) 78%;
+	}
+
+	.hero-pattern::after {
+		background-size: 150px auto, 180px auto, 100% 100%;
+		background-position: calc(100% + 26px) -10px, -50px calc(100% + 18px), center;
+	}
+
+	.hero-logos {
+		gap: 0.7rem;
+		margin-top: 0.75rem;
+		margin-bottom: 1.25rem;
+	}
+
+	.hero-logo {
+		height: 62px;
 	}
 }
