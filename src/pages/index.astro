@@ -1,17 +1,451 @@
 ---
+import '../styles/global.css';
+
+const eventDate = new Date('2026-09-26T00:00:00');
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const diasRestantes = Math.max(0, Math.ceil((eventDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)));
+
+const menuItems = [
+	{ label: 'Programa', href: '#programa' },
+	{ label: 'Menu y Precio', href: '#menu-precio' },
+	{ label: 'Apuntarse', href: '#apuntarse' },
+	{ label: 'Ubicacion', href: '#ubicacion' },
+	{ label: 'Alojamiento', href: '#alojamiento' },
+	{ label: 'Visitar', href: '#visitar' },
+	{ label: 'Gastronomia', href: '#gastronomia' }
+];
+
+const timelineItems = [
+	{
+		time: '11:00',
+		title: 'Recepción de autoridades y peñas en el ayuntamiento de Burgos',
+		description: 'Bienvenida oficial a todas las peñas barcelonistas.'
+	},
+	{
+		time: '11:35',
+		title: 'Reunión XX encuentro de peñas de Castilla y León',
+		description: 'Reunión para celebrar los 20 años del encuentro de peñas de Castilla y León, con representantes de todas las peñas participantes.'
+	},
+	{
+		time: '15:00',
+		title: 'Comida de hermandad',
+		description: 'Comida de hermandad en el Palacio de los Blasones, con un menú especial para la ocasión y un ambiente festivo.'
+	}
+];
+
+const mealMenu = [
+	{
+		category: 'Entrantes al centro',
+		items: [
+			'Ensalada de temporada',
+			'Croquetas caseras variadas',
+			'Tabla de ibericos y quesos'
+		]
+	},
+	{
+		category: 'Plato principal',
+		items: [
+			'Lechazo asado al estilo burgales',
+			'Bacalao al horno (opcion alternativa)'
+		]
+	},
+	{
+		category: 'Postre y cafe',
+		items: [
+			'Tarta conmemorativa 30/20',
+			'Cafe o infusion'
+		]
+	},
+	{
+		category: 'Bebida incluida',
+		items: [
+			'Agua, vino, cerveza y refrescos durante la comida'
+		]
+	}
+];
+
+const bizumContacts = [
+	{ name: 'Inscripciones - Pedro', phone: '620 116 572' },
+	{ name: 'Inscripciones - Victor', phone: '625 505 710' },
+	{ name: 'Inscripciones - Héctor', phone: '637 915 472' }
+];
+
+const hotels = [
+	{
+		name: 'Hotel NH Collection Palacio de Burgos',
+		description: '4 estrellas. Ubicado en un antiguo convento del siglo XVI a orillas del río Arlanzón, combina historia y confort en pleno centro.',
+		link: 'https://maps.google.com/?q=NH+Collection+Palacio+de+Burgos'
+	},
+	{
+		name: 'Hotel Abba Burgos',
+		description: '4 estrellas. Hotel moderno situado en una zona tranquila junto al centro histórico, a pocos minutos a pie de la Catedral.',
+		link: 'https://maps.google.com/?q=Abba+Burgos+Hotel'
+	},
+	{
+		name: 'Hotel Forum Evolución',
+		description: '4 estrellas. Situado junto al Museo de la Evolución Humana, destaca por su diseño contemporáneo y ubicación céntrica.',
+		link: 'https://maps.google.com/?q=Hotel+Forum+Evolucion+Burgos'
+	},
+	{
+		name: 'Hotel Mesón del Cid',
+		description: '3 estrellas. Frente a la Catedral, ofrece una estancia con encanto en un entorno histórico privilegiado.',
+		link: 'https://maps.google.com/?q=Hotel+Meson+del+Cid+Burgos'
+	},
+	{
+		name: 'Hotel Rice Bulevar',
+		description: '3 estrellas. Hotel funcional y bien comunicado, ideal para alojarse cerca del centro a un precio asequible.',
+		link: 'https://maps.google.com/?q=Hotel+Rice+Bulevar+Burgos'
+	}
+];
+
+const placesToVisit = [
+	{
+		title: 'Catedral de Burgos',
+		description: 'Catedral gótica del siglo XIII, declarada Patrimonio de la Humanidad por la UNESCO, símbolo indiscutible de la ciudad.',
+		link: 'https://maps.google.com/?q=Catedral+de+Burgos'
+	},
+	{
+		title: 'Museo de la Evolución Humana',
+		description: 'Espacio de referencia internacional dedicado a la evolución humana, vinculado a los yacimientos de Atapuerca.',
+		link: 'https://maps.google.com/?q=Museo+de+la+Evolucion+Humana+Burgos'
+	},
+	{
+		title: 'Monasterio de las Huelgas',
+		description: 'Monasterio cisterciense fundado en el siglo XII, destacado por su valor histórico y su panteón real.',
+		link: 'https://maps.google.com/?q=Monasterio+de+las+Huelgas+Burgos'
+	},
+	{
+		title: 'Castillo de Burgos',
+		description: 'Antigua fortaleza medieval situada en lo alto de la ciudad, con vistas panorámicas sobre Burgos.',
+		link: 'https://maps.google.com/?q=Castillo+de+Burgos'
+	},
+	{
+		title: 'Arco de Santa Maria',
+		description: 'Puerta monumental del siglo XVI, uno de los accesos históricos más representativos al casco antiguo.',
+		link: 'https://maps.google.com/?q=Arco+de+Santa+Maria+Burgos'
+	},
+	{
+		title: 'Paseo del Espolón',
+		description: 'Paseo arbolado junto al río Arlanzón, considerado el corazón social y uno de los espacios más emblemáticos de la ciudad.',
+		link: 'https://maps.google.com/?q=Paseo+del+Espolon+Burgos'
+	}
+];
+
+const foodSpots = [
+	{
+		title: 'Calle San Lorenzo',
+		description: 'Zona emblemática de tapeo en el centro de Burgos, conocida por su ambiente animado y su variada oferta gastronómica.',
+		link: 'https://maps.google.com/?q=Calle+San+Lorenzo+Burgos'
+	},
+	{
+		title: 'Calle Sombrerería / La Paloma',
+		description: 'Área tradicional de bares y tabernas, referente del tapeo burgalés por su ambiente y autenticidad.',
+		link: 'https://maps.google.com/?q=Calle+Sombrereria+Burgos'
+	},
+	{
+		title: 'Plaza Huerto del Rey',
+		description: 'Plaza céntrica con amplia oferta de restaurantes y terrazas, ideal para disfrutar del ambiente urbano.',
+		link: 'https://maps.google.com/?q=Plaza+Huerto+del+Rey+Burgos'
+	},
+	{
+		title: 'Casa Ojeda',
+		description: 'Restaurante histórico de cocina castellana, reconocido por sus asados tradicionales y su larga trayectoria.',
+		link: 'https://maps.google.com/?q=Casa+Ojeda+Burgos'
+	},
+	{
+		title: 'La Favorita',
+		description: 'Restaurante contemporáneo que ofrece cocina castellana reinterpretada en un entorno cuidado y acogedor.',
+		link: 'https://maps.google.com/?q=La+Favorita+Burgos'
+	},
+	{
+		title: 'Cerveceria Morito',
+		description: 'Clásico del tapeo burgalés, famoso por sus raciones abundantes y su ambiente siempre animado.',
+		link: 'https://maps.google.com/?q=Cerveceria+Morito+Burgos'
+	}
+];
 
 ---
 
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/png" href="/PBTierrasdelcid.png" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>30/20 | Tierras del Cid</title>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="bg-slate-50 text-slate-900 antialiased">
+		<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
+			<div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+				<a href="#inicio" class="flex items-center gap-3">
+					<span class="text-4xl font-extrabold tracking-tight text-blue-800">30</span>
+					<span class="text-4xl font-extrabold tracking-tight text-red-700">/20</span>
+					<span class="hidden border-l border-slate-200 pl-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 sm:inline">
+						Tierras del Cid
+					</span>
+				</a>
+				<nav class="hidden items-center gap-7 text-sm font-semibold text-slate-500 md:flex">
+					{menuItems.map((item) => (
+						<a href={item.href} class="transition hover:text-slate-900">
+							{item.label}
+						</a>
+					))}
+				</nav>
+				<details class="relative md:hidden">
+					<summary class="flex h-10 w-10 cursor-pointer list-none flex-col items-center justify-center gap-1 rounded-lg border border-slate-300 bg-white text-slate-700 transition hover:bg-slate-50 [&::-webkit-details-marker]:hidden">
+						<span class="sr-only">Abrir menu</span>
+						<span class="block h-0.5 w-5 bg-current"></span>
+						<span class="block h-0.5 w-5 bg-current"></span>
+						<span class="block h-0.5 w-5 bg-current"></span>
+					</summary>
+					<nav class="absolute right-0 top-full mt-3 w-56 rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
+						{menuItems.map((item) => (
+							<a
+								href={item.href}
+								class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 hover:text-slate-900"
+							>
+								{item.label}
+							</a>
+						))}
+					</nav>
+				</details>
+			</div>
+		</header>
+
+		<main>
+			<section id="inicio" class="hero-pattern border-b border-slate-200">
+				<div class="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+					<p class="mb-6 text-[clamp(5rem,13vw,8rem)] font-black leading-none tracking-tight text-blue-800">
+						30<span class="text-red-700">/20</span>
+					</p>
+					<h1 class="max-w-2xl text-balance text-4xl font-extrabold leading-tight text-slate-900 sm:text-5xl">
+						Treinta años de pasión, un encuentro inolvidable.
+					</h1>
+					<p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
+						26 de septiembre de 2026. Burgos se viste de blaugrana para celebrar nuestra historia.
+						XXX Aniversario Peña Barcelonista Tierras del Cid y XX Encuentro de Peñas de Castilla y León.
+					</p>
+					<div class="mt-10 flex flex-wrap items-end gap-6">
+						<a
+							href="#programa"
+							class="rounded-xl bg-blue-800 px-7 py-4 text-sm font-bold text-white shadow-md shadow-blue-900/20 transition hover:-translate-y-0.5 hover:bg-blue-700"
+						>
+							Ver programa completo
+						</a>
+						<div>
+							<p class="text-5xl font-black leading-none text-blue-800">{diasRestantes}</p>
+							<p class="mt-1 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Dias restantes</p>
+						</div>
+					</div>
+				</div>
+				<div class="hero-logos" aria-label="Logos del encuentro">
+					<img src="/Agrupacion.png" alt="Agrupacion" class="hero-logo hero-logo--round" loading="lazy" />
+					<img src="/Federacion.png" alt="Federacion" class="hero-logo" loading="lazy" />
+					<img src="/PBTierrasdelcid.png" alt="PB Tierras del Cid" class="hero-logo hero-logo--round" loading="lazy" />
+				</div>
+			</section>
+
+			<section id="programa" class="border-b border-slate-200 bg-white">
+				<div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+					<p class="section-kicker">26 de septiembre de 2026</p>
+					<h2 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">Programa del dia</h2>
+					<div class="mt-12 grid gap-6">
+						{timelineItems.map((item) => (
+							<article class="grid gap-3 border-l border-red-200 pl-4 sm:grid-cols-[78px_1fr] sm:gap-8 sm:pl-5">
+								<p class="text-3xl font-bold leading-none text-slate-900 sm:text-4xl">{item.time}</p>
+								<div>
+									<h3 class="text-xl font-bold text-slate-900">{item.title}</h3>
+									<p class="mt-2 max-w-3xl text-base leading-relaxed text-slate-600">{item.description}</p>
+									{item.time === '15:00' && (
+										<a
+											target="_blank"
+											rel="noreferrer"
+											href="https://maps.google.com/?q=Palacio+de+los+Blasones+Burgos"
+											class="mt-3 inline-flex font-semibold text-blue-800 transition hover:text-blue-700"
+										>
+											Ver en Google Maps ->
+										</a>
+									)}
+								</div>
+							</article>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<section id="menu-precio" class="border-b border-slate-200 bg-slate-50">
+				<div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+					<p class="section-kicker">Comida oficial</p>
+					<h2 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">Menu y precio</h2>
+					<p class="mt-5 max-w-3xl text-xl leading-relaxed text-slate-600">
+						Este sera el menu de la comida en el Palacio de los Blasones.
+					</p>
+					<div class="mt-10 grid gap-4 md:grid-cols-2">
+						{mealMenu.map((block) => (
+							<article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+								<h3 class="text-2xl font-bold leading-tight text-slate-900">{block.category}</h3>
+								<ul class="mt-4 space-y-2 text-base leading-relaxed text-slate-600">
+									{block.items.map((item) => (
+										<li class="flex gap-2">
+											<span class="mt-2 block h-2 w-2 rounded-full bg-red-700"></span>
+											<span>{item}</span>
+										</li>
+									))}
+								</ul>
+							</article>
+						))}
+					</div>
+					<div class="mt-10 rounded-2xl border border-blue-200 bg-blue-800 p-6 text-white shadow-sm">
+						<p class="text-xs font-semibold uppercase tracking-[0.18em] text-blue-100">Precio por persona</p>
+						<p class="mt-2 text-5xl font-black leading-none">45 EUR</p>
+						<p class="mt-3 text-base text-blue-100">
+							Incluye menu completo, bebida durante la comida y detalles conmemorativos del evento.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section id="apuntarse" class="border-b border-slate-200 bg-white">
+				<div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+					<p class="section-kicker">Reserva tu plaza</p>
+					<h2 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">Como apuntarse</h2>
+					<p class="mt-5 max-w-3xl text-xl leading-relaxed text-slate-600">
+						Haz tu Bizum al movil que prefieras de la organizacion e indica en el concepto: nombre + numero de asistentes.
+					</p>
+					<div class="mt-10 grid gap-4 md:grid-cols-3">
+						{bizumContacts.map((contact) => (
+							<article class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+								<p class="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500">Bizum</p>
+								<h3 class="mt-2 text-xl font-bold leading-tight text-slate-900">{contact.name}</h3>
+								<p class="mt-3 text-3xl font-black leading-none text-blue-800">{contact.phone}</p>
+							</article>
+						))}
+					</div>
+					<div class="mt-8 rounded-2xl border border-red-200 bg-red-50 p-6">
+						<p class="text-sm font-semibold text-red-800">
+							Importante: una vez hecho el Bizum, envia justificante por WhatsApp para confirmar la inscripcion.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section id="ubicacion" class="border-b border-slate-200 bg-slate-50">
+				<div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+					<p class="section-kicker">Lugar del Evento</p>
+					<h2 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">Palacio de los Blasones</h2>
+					<p class="mt-5 max-w-2xl text-xl leading-relaxed text-slate-600">
+						Palacio renacentista del siglo XVI situado en el corazón de Burgos, referente del patrimonio histórico de la ciudad. 
+						Su cuidada arquitectura y la solemnidad de sus espacios lo convierten en el escenario idóneo para acoger una celebración de especial significado. 
+						Un enclave distinguido que aportará carácter, elegancia y valor histórico a este XXX Aniversario y XX Encuentro de Peñas.
+					</p>
+					<div class="mt-10 overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+						<iframe
+							title="Mapa Palacio de los Blasones"
+							src="https://www.google.com/maps?q=Palacio%20de%20los%20Blasones%20Burgos&output=embed"
+							loading="lazy"
+							class="h-[320px] w-full md:h-[380px]"
+						></iframe>
+					</div>
+				</div>
+			</section>
+
+			<section id="alojamiento" class="border-b border-slate-200 bg-white">
+				<div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+					<p class="section-kicker">Donde dormir</p>
+					<h2 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">Alojamiento</h2>
+					<p class="mt-5 max-w-2xl text-xl leading-relaxed text-slate-600">
+						Hoteles recomendados en el centro de Burgos, todos a poca distancia de la sede del evento.
+					</p>
+					<div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+						{hotels.map((hotel) => (
+							<article class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+								<h3 class="text-2xl font-bold leading-tight text-slate-900">{hotel.name}</h3>
+								<p class="mt-3 text-base leading-relaxed text-slate-600">{hotel.description}</p>
+								<a
+									href={hotel.link}
+									target="_blank"
+									rel="noreferrer"
+									class="mt-5 inline-flex font-semibold text-blue-800 transition hover:text-blue-700"
+								>
+									Ver en mapa ->
+								</a>
+							</article>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<section id="visitar" class="border-b border-slate-200 bg-slate-50">
+				<div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+					<p class="section-kicker">Qué descubrir</p>
+					<h2 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">Qué visitar en Burgos</h2>
+					<p class="mt-5 max-w-2xl text-xl leading-relaxed text-slate-600">
+						Burgos es una ciudad milenaria con un patrimonio extraordinario. Aprovecha tu visita para descubrir estos lugares imprescindibles.
+					</p>
+					<div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+						{placesToVisit.map((place) => (
+							<article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+								<h3 class="text-2xl font-bold leading-tight text-slate-900">{place.title}</h3>
+								<p class="mt-3 text-base leading-relaxed text-slate-600">{place.description}</p>
+								<a
+									href={place.link}
+									target="_blank"
+									rel="noreferrer"
+									class="mt-5 inline-flex font-semibold text-blue-800 transition hover:text-blue-700"
+								>
+									Ver en mapa ->
+								</a>
+							</article>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<section id="gastronomia" class="border-b border-slate-200 bg-white">
+				<div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+					<p class="section-kicker">Dónde comer y tapear</p>
+					<h2 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">Bares y restaurantes</h2>
+					<p class="mt-5 max-w-2xl text-xl leading-relaxed text-slate-600">
+						Burgos es tierra de buen comer. Estas son nuestras recomendaciones para después del evento.
+					</p>
+					<div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+						{foodSpots.map((spot) => (
+							<article class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+								<h3 class="text-2xl font-bold leading-tight text-slate-900">{spot.title}</h3>
+								<p class="mt-3 text-base leading-relaxed text-slate-600">{spot.description}</p>
+								<a
+									href={spot.link}
+									target="_blank"
+									rel="noreferrer"
+									class="mt-5 inline-flex font-semibold text-blue-800 transition hover:text-blue-700"
+								>
+									Ver en mapa ->
+								</a>
+							</article>
+						))}
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="bg-slate-100">
+			<div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+				<div class="flex flex-col justify-between gap-8 border-b border-slate-200 pb-8 md:flex-row md:items-end">
+					<div>
+						<p class="text-4xl font-extrabold text-blue-800">30 <span class="text-red-700">/20</span></p>
+						<p class="mt-3 text-sm leading-relaxed text-slate-500">
+							Peña Barcelonista Tierras del Cid - Burgos<br />
+							Confederación de Peñas Barcelonistas de Castilla y León
+						</p>
+					</div>
+					<div class="text-left text-sm text-slate-500 md:text-right">
+						<p>26 de septiembre de 2026</p>
+						<p class="mt-1">Burgos, Castilla y León</p>
+					</div>
+				</div>
+				<p class="pt-6 text-sm text-slate-400">(c) 2026 Peña Barcelonista Tierras del Cid. Todos los derechos reservados.</p>
+			</div>
+		</footer>
 	</body>
 </html>
