@@ -8,6 +8,8 @@ const diasRestantes = Math.max(0, Math.ceil((eventDate.getTime() - today.getTime
 
 const menuItems = [
 	{ label: 'Programa', href: '#programa' },
+	{ label: 'Menu y Precio', href: '#menu-precio' },
+	{ label: 'Apuntarse', href: '#apuntarse' },
 	{ label: 'Ubicacion', href: '#ubicacion' },
 	{ label: 'Alojamiento', href: '#alojamiento' },
 	{ label: 'Visitar', href: '#visitar' },
@@ -32,30 +34,67 @@ const timelineItems = [
 	}
 ];
 
+const mealMenu = [
+	{
+		category: 'Entrantes al centro',
+		items: [
+			'Ensalada de temporada',
+			'Croquetas caseras variadas',
+			'Tabla de ibericos y quesos'
+		]
+	},
+	{
+		category: 'Plato principal',
+		items: [
+			'Lechazo asado al estilo burgales',
+			'Bacalao al horno (opcion alternativa)'
+		]
+	},
+	{
+		category: 'Postre y cafe',
+		items: [
+			'Tarta conmemorativa 30/20',
+			'Cafe o infusion'
+		]
+	},
+	{
+		category: 'Bebida incluida',
+		items: [
+			'Agua, vino, cerveza y refrescos durante la comida'
+		]
+	}
+];
+
+const bizumContacts = [
+	{ name: 'Inscripciones - Pedro', phone: '620 116 572' },
+	{ name: 'Inscripciones - Victor', phone: '625 505 710' },
+	{ name: 'Inscripciones - Héctor', phone: '637 915 472' }
+];
+
 const hotels = [
 	{
 		name: 'Hotel NH Collection Palacio de Burgos',
-		description: '4 estrellas. Ubicado en un convento del siglo XVI junto al centro histórico.',
+		description: '4 estrellas. Ubicado en un antiguo convento del siglo XVI a orillas del río Arlanzón, combina historia y confort en pleno centro.',
 		link: 'https://maps.google.com/?q=NH+Collection+Palacio+de+Burgos'
 	},
 	{
 		name: 'Hotel Abba Burgos',
-		description: '4 estrellas. Moderno, con vistas al río Arlanzón y a pocos pasos de la Catedral.',
+		description: '4 estrellas. Hotel moderno situado en una zona tranquila junto al centro histórico, a pocos minutos a pie de la Catedral.',
 		link: 'https://maps.google.com/?q=Abba+Burgos+Hotel'
 	},
 	{
 		name: 'Hotel Forum Evolución',
-		description: '4 estrellas. Junto al Museo de la Evolución Humana, diseño contemporáneo.',
+		description: '4 estrellas. Situado junto al Museo de la Evolución Humana, destaca por su diseño contemporáneo y ubicación céntrica.',
 		link: 'https://maps.google.com/?q=Hotel+Forum+Evolucion+Burgos'
 	},
 	{
 		name: 'Hotel Mesón del Cid',
-		description: '3 estrellas. Frente a la Catedral, en un edificio del siglo XV con encanto histórico.',
+		description: '3 estrellas. Frente a la Catedral, ofrece una estancia con encanto en un entorno histórico privilegiado.',
 		link: 'https://maps.google.com/?q=Hotel+Meson+del+Cid+Burgos'
 	},
 	{
 		name: 'Hotel Rice Bulevar',
-		description: '3 estrellas. Céntrico y económico, ideal para una escapada cultural.',
+		description: '3 estrellas. Hotel funcional y bien comunicado, ideal para alojarse cerca del centro a un precio asequible.',
 		link: 'https://maps.google.com/?q=Hotel+Rice+Bulevar+Burgos'
 	}
 ];
@@ -63,32 +102,32 @@ const hotels = [
 const placesToVisit = [
 	{
 		title: 'Catedral de Burgos',
-		description: 'Obra maestra del gótico español y Patrimonio de la UNESCO desde 1984.',
+		description: 'Catedral gótica del siglo XIII, declarada Patrimonio de la Humanidad por la UNESCO, símbolo indiscutible de la ciudad.',
 		link: 'https://maps.google.com/?q=Catedral+de+Burgos'
 	},
 	{
 		title: 'Museo de la Evolución Humana',
-		description: 'Uno de los museos más importantes de Europa sobre la evolución de la especie humana.',
+		description: 'Espacio de referencia internacional dedicado a la evolución humana, vinculado a los yacimientos de Atapuerca.',
 		link: 'https://maps.google.com/?q=Museo+de+la+Evolucion+Humana+Burgos'
 	},
 	{
 		title: 'Monasterio de las Huelgas',
-		description: 'Monasterio cisterciense del siglo XII con impresionantes claustros y panteón real.',
+		description: 'Monasterio cisterciense fundado en el siglo XII, destacado por su valor histórico y su panteón real.',
 		link: 'https://maps.google.com/?q=Monasterio+de+las+Huelgas+Burgos'
 	},
 	{
 		title: 'Castillo de Burgos',
-		description: 'Fortaleza medieval en lo alto del cerro con las mejores vistas panorámicas de la ciudad.',
+		description: 'Antigua fortaleza medieval situada en lo alto de la ciudad, con vistas panorámicas sobre Burgos.',
 		link: 'https://maps.google.com/?q=Castillo+de+Burgos'
 	},
 	{
 		title: 'Arco de Santa Maria',
-		description: 'Puerta monumental del siglo XIV que daba acceso al casco antiguo de la ciudad.',
+		description: 'Puerta monumental del siglo XVI, uno de los accesos históricos más representativos al casco antiguo.',
 		link: 'https://maps.google.com/?q=Arco+de+Santa+Maria+Burgos'
 	},
 	{
 		title: 'Paseo del Espolón',
-		description: 'El paseo más emblemático de Burgos, bordeado de árboles junto al río Arlanzón.',
+		description: 'Paseo arbolado junto al río Arlanzón, considerado el corazón social y uno de los espacios más emblemáticos de la ciudad.',
 		link: 'https://maps.google.com/?q=Paseo+del+Espolon+Burgos'
 	}
 ];
@@ -96,32 +135,32 @@ const placesToVisit = [
 const foodSpots = [
 	{
 		title: 'Calle San Lorenzo',
-		description: 'La zona de tapas por excelencia. Recorre sus bares y prueba la morcilla de Burgos y el lechazo.',
+		description: 'Zona emblemática de tapeo en el centro de Burgos, conocida por su ambiente animado y su variada oferta gastronómica.',
 		link: 'https://maps.google.com/?q=Calle+San+Lorenzo+Burgos'
 	},
 	{
 		title: 'Calle Sombrerería / La Paloma',
-		description: 'El barrio húmedo de Burgos. Ambiente animado y tabernas con carácter.',
+		description: 'Área tradicional de bares y tabernas, referente del tapeo burgalés por su ambiente y autenticidad.',
 		link: 'https://maps.google.com/?q=Calle+Sombrereria+Burgos'
 	},
 	{
 		title: 'Plaza Huerto del Rey',
-		description: 'Zona de restaurantes con terraza junto al centro, ideal para cenar al aire libre.',
+		description: 'Plaza céntrica con amplia oferta de restaurantes y terrazas, ideal para disfrutar del ambiente urbano.',
 		link: 'https://maps.google.com/?q=Plaza+Huerto+del+Rey+Burgos'
 	},
 	{
 		title: 'Casa Ojeda',
-		description: 'Restaurante clasico de Burgos. Imprescindible su lechazo asado y su ambiente senorial.',
+		description: 'Restaurante histórico de cocina castellana, reconocido por sus asados tradicionales y su larga trayectoria.',
 		link: 'https://maps.google.com/?q=Casa+Ojeda+Burgos'
 	},
 	{
 		title: 'La Favorita',
-		description: 'Cocina castellana actualizada en un espacio acogedor cerca de la Catedral.',
+		description: 'Restaurante contemporáneo que ofrece cocina castellana reinterpretada en un entorno cuidado y acogedor.',
 		link: 'https://maps.google.com/?q=La+Favorita+Burgos'
 	},
 	{
 		title: 'Cerveceria Morito',
-		description: 'Tapas generosas y buen ambiente. Un clasico entre los burgaleses.',
+		description: 'Clásico del tapeo burgalés, famoso por sus raciones abundantes y su ambiente siempre animado.',
 		link: 'https://maps.google.com/?q=Cerveceria+Morito+Burgos'
 	}
 ];
@@ -235,12 +274,70 @@ const foodSpots = [
 				</div>
 			</section>
 
+			<section id="menu-precio" class="border-b border-slate-200 bg-slate-50">
+				<div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+					<p class="section-kicker">Comida oficial</p>
+					<h2 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">Menu y precio</h2>
+					<p class="mt-5 max-w-3xl text-xl leading-relaxed text-slate-600">
+						Este sera el menu de la comida en el Palacio de los Blasones.
+					</p>
+					<div class="mt-10 grid gap-4 md:grid-cols-2">
+						{mealMenu.map((block) => (
+							<article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+								<h3 class="text-2xl font-bold leading-tight text-slate-900">{block.category}</h3>
+								<ul class="mt-4 space-y-2 text-base leading-relaxed text-slate-600">
+									{block.items.map((item) => (
+										<li class="flex gap-2">
+											<span class="mt-2 block h-2 w-2 rounded-full bg-red-700"></span>
+											<span>{item}</span>
+										</li>
+									))}
+								</ul>
+							</article>
+						))}
+					</div>
+					<div class="mt-10 rounded-2xl border border-blue-200 bg-blue-800 p-6 text-white shadow-sm">
+						<p class="text-xs font-semibold uppercase tracking-[0.18em] text-blue-100">Precio por persona</p>
+						<p class="mt-2 text-5xl font-black leading-none">45 EUR</p>
+						<p class="mt-3 text-base text-blue-100">
+							Incluye menu completo, bebida durante la comida y detalles conmemorativos del evento.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section id="apuntarse" class="border-b border-slate-200 bg-white">
+				<div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+					<p class="section-kicker">Reserva tu plaza</p>
+					<h2 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">Como apuntarse</h2>
+					<p class="mt-5 max-w-3xl text-xl leading-relaxed text-slate-600">
+						Haz tu Bizum al movil que prefieras de la organizacion e indica en el concepto: nombre + numero de asistentes.
+					</p>
+					<div class="mt-10 grid gap-4 md:grid-cols-3">
+						{bizumContacts.map((contact) => (
+							<article class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+								<p class="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500">Bizum</p>
+								<h3 class="mt-2 text-xl font-bold leading-tight text-slate-900">{contact.name}</h3>
+								<p class="mt-3 text-3xl font-black leading-none text-blue-800">{contact.phone}</p>
+							</article>
+						))}
+					</div>
+					<div class="mt-8 rounded-2xl border border-red-200 bg-red-50 p-6">
+						<p class="text-sm font-semibold text-red-800">
+							Importante: una vez hecho el Bizum, envia justificante por WhatsApp para confirmar la inscripcion.
+						</p>
+					</div>
+				</div>
+			</section>
+
 			<section id="ubicacion" class="border-b border-slate-200 bg-slate-50">
 				<div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
 					<p class="section-kicker">Lugar del Evento</p>
 					<h2 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">Palacio de los Blasones</h2>
 					<p class="mt-5 max-w-2xl text-xl leading-relaxed text-slate-600">
-						Un palacio renacentista del siglo XVI en pleno centro de Burgos. El marco perfecto para una celebración histórica.
+						Palacio renacentista del siglo XVI situado en el corazón de Burgos, referente del patrimonio histórico de la ciudad. 
+						Su cuidada arquitectura y la solemnidad de sus espacios lo convierten en el escenario idóneo para acoger una celebración de especial significado. 
+						Un enclave distinguido que aportará carácter, elegancia y valor histórico a este XXX Aniversario y XX Encuentro de Peñas.
 					</p>
 					<div class="mt-10 overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
 						<iframe
