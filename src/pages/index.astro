@@ -5,6 +5,7 @@ const eventDate = new Date('2026-09-26T00:00:00');
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 const diasRestantes = Math.max(0, Math.ceil((eventDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)));
+const anniversaryLabel = '30 aniversario · 20 Encuentro de Peñas de Castilla y Leon';
 
 const menuItems = [
 	{ label: 'Programa', href: '#programa' },
@@ -19,18 +20,28 @@ const menuItems = [
 const timelineItems = [
 	{
 		time: '11:00',
-		title: 'Recepción de autoridades y peñas en el ayuntamiento de Burgos',
-		description: 'Bienvenida oficial a todas las peñas barcelonistas.'
+		title: 'Recepción de invitados',
+		description: 'Recepción inicial de asistentes en las Salas del Polisón del Teatro Principal de Burgos.'
 	},
 	{
-		time: '11:35',
+		time: '11:30',
 		title: 'Reunión XX encuentro de peñas de Castilla y León',
-		description: 'Reunión para celebrar los 20 años del encuentro de peñas de Castilla y León, con representantes de todas las peñas participantes.'
+		description: 'Encuentro institucional de peñas, presidido por Josep Ignasi Macià, en las Salas del Polisón del Teatro Principal.'
+	},
+	{
+		time: '12:30',
+		title: 'Vino de bienvenida',
+		description: 'Aperitivo de bienvenida en la Sala Riviera del Teatro Principal, situada en el Paseo del Espolón.'
+	},
+	{
+		time: '13:30',
+		title: 'Recepción en el Ayuntamiento de Burgos',
+		description: 'Acto institucional de recepción en el Ayuntamiento de Burgos.'
 	},
 	{
 		time: '15:00',
 		title: 'Comida de hermandad',
-		description: 'Comida de hermandad en el Palacio de los Blasones, con un menú especial para la ocasión y un ambiente festivo.'
+		description: 'Comida conmemorativa en el Palacio de los Blasones, con un menú especial para la ocasión.'
 	}
 ];
 
@@ -38,23 +49,22 @@ const mealMenu = [
 	{
 		category: 'Entrantes al centro',
 		items: [
-			'Ensalada de temporada',
-			'Croquetas caseras variadas',
-			'Tabla de ibericos y quesos'
+			'Morcilla IGP a la sarten con pimientos de piquillo',
+			'Ensaladilla de pulpo y langostinos con pan de maiz crujiente',
 		]
 	},
 	{
 		category: 'Plato principal',
 		items: [
-			'Lechazo asado al estilo burgales',
-			'Bacalao al horno (opcion alternativa)'
+			'Dorada semisalvaje a la plancha con toques citricos',
+			'Rabo deshuesado a baja temperatura sobre parmentier',
 		]
 	},
 	{
 		category: 'Postre y cafe',
 		items: [
-			'Tarta conmemorativa 30/20',
-			'Cafe o infusion'
+			'Tarta de manzana',
+			'Cafe'
 		]
 	},
 	{
@@ -67,8 +77,7 @@ const mealMenu = [
 
 const bizumContacts = [
 	{ name: 'Inscripciones - Pedro', phone: '620 116 572' },
-	{ name: 'Inscripciones - Victor', phone: '625 505 710' },
-	{ name: 'Inscripciones - Héctor', phone: '637 915 472' }
+	{ name: 'Inscripciones - Victor', phone: '625 505 710' }
 ];
 
 const hotels = [
@@ -178,11 +187,16 @@ const foodSpots = [
 	<body class="bg-slate-50 text-slate-900 antialiased">
 		<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
 			<div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-				<a href="#inicio" class="flex items-center gap-3">
-					<span class="text-4xl font-extrabold tracking-tight text-blue-800">30</span>
-					<span class="text-4xl font-extrabold tracking-tight text-red-700">/20</span>
-					<span class="hidden border-l border-slate-200 pl-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 sm:inline">
-						Tierras del Cid
+				<a href="#inicio" class="group flex flex-col gap-1">
+					<span class="flex items-center gap-3">
+						<span class="text-4xl font-extrabold tracking-tight text-blue-800">30</span>
+						<span class="text-4xl font-extrabold tracking-tight text-red-700">/20</span>
+						<span class="hidden border-l border-slate-200 pl-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 sm:inline">
+							Tierras del Cid
+						</span>
+					</span>
+					<span class="text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-slate-500 transition group-hover:text-slate-700 sm:text-[0.68rem]">
+						{anniversaryLabel}
 					</span>
 				</a>
 				<nav class="hidden items-center gap-7 text-sm font-semibold text-slate-500 md:flex">
@@ -218,6 +232,9 @@ const foodSpots = [
 				<div class="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
 					<p class="mb-6 text-[clamp(5rem,13vw,8rem)] font-black leading-none tracking-tight text-blue-800">
 						30<span class="text-red-700">/20</span>
+					</p>
+					<p class="-mt-2 mb-6 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 sm:text-sm">
+						{anniversaryLabel}
 					</p>
 					<h1 class="max-w-2xl text-balance text-4xl font-extrabold leading-tight text-slate-900 sm:text-5xl">
 						Treinta años de pasión, un encuentro inolvidable.
@@ -298,9 +315,9 @@ const foodSpots = [
 					</div>
 					<div class="mt-10 rounded-2xl border border-blue-200 bg-blue-800 p-6 text-white shadow-sm">
 						<p class="text-xs font-semibold uppercase tracking-[0.18em] text-blue-100">Precio por persona</p>
-						<p class="mt-2 text-5xl font-black leading-none">45 EUR</p>
+						<p class="mt-2 text-5xl font-black leading-none">55 EUR</p>
 						<p class="mt-3 text-base text-blue-100">
-							Incluye menu completo, bebida durante la comida y detalles conmemorativos del evento.
+							Incluye menu completo, bebidas cafe y postre.
 						</p>
 					</div>
 				</div>
@@ -311,8 +328,13 @@ const foodSpots = [
 					<p class="section-kicker">Reserva tu plaza</p>
 					<h2 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">Como apuntarse</h2>
 					<p class="mt-5 max-w-3xl text-xl leading-relaxed text-slate-600">
-						Haz tu Bizum al movil que prefieras de la organizacion e indica en el concepto: nombre + numero de asistentes.
+						Puedes realizar el pago de dos maneras: por Bizum a cualquiera de los moviles indicados o por transferencia bancaria a la cuenta de la Peña Tierras del Cid.
 					</p>
+					<div class="mt-8 rounded-2xl border border-blue-200 bg-blue-50 p-6">
+						<p class="text-xs font-semibold uppercase tracking-[0.18em] text-blue-800">Transferencia bancaria</p>
+						<p class="mt-2 text-base font-semibold text-slate-700">Cuenta de Peña Tierras del Cid</p>
+						<p class="mt-2 text-xl font-black tracking-wide text-blue-900 sm:text-2xl">ES4821002366162300037652</p>
+					</div>
 					<div class="mt-10 grid gap-4 md:grid-cols-3">
 						{bizumContacts.map((contact) => (
 							<article class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
@@ -324,7 +346,7 @@ const foodSpots = [
 					</div>
 					<div class="mt-8 rounded-2xl border border-red-200 bg-red-50 p-6">
 						<p class="text-sm font-semibold text-red-800">
-							Importante: una vez hecho el Bizum, envia justificante por WhatsApp para confirmar la inscripcion.
+							Importante: una vez hecho el pago (Bizum o transferencia), envia justificante por WhatsApp para confirmar la inscripcion.
 						</p>
 					</div>
 				</div>
