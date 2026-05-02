@@ -80,6 +80,8 @@ const bizumContacts = [
 	{ name: 'Inscripciones - Victor', phone: '625 505 710' }
 ];
 
+const bankIban = 'ES4821002366162300037652';
+
 const hotels = [
 	{
 		name: 'Hotel NH Collection Palacio de Burgos',
@@ -330,12 +332,20 @@ const foodSpots = [
 					<p class="mt-5 max-w-3xl text-xl leading-relaxed text-slate-600">
 						Puedes realizar el pago de dos maneras: por Bizum a cualquiera de los moviles indicados o por transferencia bancaria a la cuenta de la Peña Tierras del Cid.
 					</p>
-					<div class="mt-8 rounded-2xl border border-blue-200 bg-blue-50 p-6">
-						<p class="text-xs font-semibold uppercase tracking-[0.18em] text-blue-800">Transferencia bancaria</p>
-						<p class="mt-2 text-base font-semibold text-slate-700">Cuenta de Peña Tierras del Cid</p>
-						<p class="mt-2 text-xl font-black tracking-wide text-blue-900 sm:text-2xl">ES4821002366162300037652</p>
-					</div>
-					<div class="mt-10 grid gap-4 md:grid-cols-3">
+					<div class="mt-10 grid gap-4 md:grid-cols-2">
+						<article class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md md:col-span-2">
+							<p class="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500">Transferencia bancaria</p>
+							<h3 class="mt-2 text-xl font-bold leading-tight text-slate-900">Cuenta de Peña Tierras del Cid</h3>
+							<p class="mt-3 text-3xl font-black leading-none text-blue-800">{bankIban}</p>
+							<button
+								type="button"
+								id="copy-iban-button"
+								data-iban={bankIban}
+								class="mt-5 inline-flex rounded-lg bg-blue-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
+							>
+								Copiar IBAN
+							</button>
+						</article>
 						{bizumContacts.map((contact) => (
 							<article class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
 								<p class="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500">Bizum</p>
@@ -469,5 +479,41 @@ const foodSpots = [
 				<p class="pt-6 text-sm text-slate-400">(c) 2026 Peña Barcelonista Tierras del Cid. Todos los derechos reservados.</p>
 			</div>
 		</footer>
+
+		<script>
+			const copyIbanButton = document.querySelector('#copy-iban-button');
+
+			copyIbanButton?.addEventListener('click', async () => {
+				const iban = copyIbanButton.getAttribute('data-iban') ?? '';
+				if (!iban) return;
+
+				const copyWithFallback = () => {
+					const tempInput = document.createElement('textarea');
+					tempInput.value = iban;
+					document.body.appendChild(tempInput);
+					tempInput.select();
+					document.execCommand('copy');
+					document.body.removeChild(tempInput);
+				};
+
+				try {
+					if (navigator.clipboard?.writeText) {
+						await navigator.clipboard.writeText(iban);
+					} else {
+						copyWithFallback();
+					}
+					copyIbanButton.textContent = 'IBAN copiado';
+					setTimeout(() => {
+						copyIbanButton.textContent = 'Copiar IBAN';
+					}, 1800);
+				} catch {
+					copyWithFallback();
+					copyIbanButton.textContent = 'IBAN copiado';
+					setTimeout(() => {
+						copyIbanButton.textContent = 'Copiar IBAN';
+					}, 1800);
+				}
+			});
+		</script>
 	</body>
 </html>
