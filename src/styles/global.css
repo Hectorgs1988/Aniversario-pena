@@ -68,12 +68,18 @@ body {
 .hero-logos {
 	position: relative;
 	z-index: 11;
-	display: flex;
+	display: none;
 	align-items: center;
 	justify-content: center;
 	gap: 1rem;
 	margin: 1rem auto 1.4rem;
 	width: fit-content;
+}
+
+@media (min-width: 768px) {
+	.hero-logos {
+		display: flex;
+	}
 }
 
 .hero-logo {
