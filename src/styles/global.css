@@ -113,13 +113,19 @@ body {
 	}
 
 	.hero-pattern::before {
-		background-size: 210px auto, 170px auto, 140px auto;
-		background-position: -62px -36px, calc(100% + 56px) calc(100% + 20px), calc(100% + 42px) 78%;
+		background-image: url('/FlechaAzul.png'), url('/FlechaAzul.png');
+		background-size: 210px auto, 220px auto;
+		background-position: -62px -36px, calc(100% + 44px) calc(100% + 16px);
+		opacity: 1;
 	}
 
 	.hero-pattern::after {
+		background-image:
+			url('/ManchaRoja.png'),
+			url('/ManchaRoja.png'),
+			linear-gradient(180deg, rgba(245, 246, 250, 0.10) 0%, rgba(245, 246, 250, 0.10) 100%);
 		background-size: 150px auto, 180px auto, 100% 100%;
-		background-position: calc(100% + 26px) -10px, -50px calc(100% + 18px), center;
+		background-position: calc(100% + 26px) -10px, calc(100% - 22px) 80%, center;
 	}
 
 	.hero-logos {
