@@ -78,6 +78,41 @@ const mealMenu = [
 	}
 ];
 
+const kidsMenus = [
+	{
+		title: 'Menu 1',
+		items: [
+			'Pasta boloñesa',
+			'Pollo estilo Villeroy',
+			'Helado',
+			'Agua y refrescos'
+		],
+		price: '23 EUR IVA incluido'
+	},
+	{
+		title: 'Menu 2',
+		items: [
+			'Plato de embutidos',
+			'Croquetas caseras',
+			'Escalope de ternera con patatas',
+			'Helado',
+			'Agua y refrescos'
+		],
+		price: '29 EUR IVA incluido'
+	},
+	{
+		title: 'Menu 3',
+		items: [
+			'Plato de embutidos',
+			'Croquetas caseras',
+			'Entrecot con patatas',
+			'Helado',
+			'Agua y refrescos'
+		],
+		price: '39 EUR IVA incluido'
+	}
+];
+
 const bizumContacts = [
 	{ name: 'Inscripciones - Pedro García', phone: '620 116 572' },
 	{ name: 'Inscripciones - Victor Capitán', phone: '625 505 710' }
@@ -213,7 +248,7 @@ const foodSpots = [
 						</a>
 					))}
 				</nav>
-				<details class="relative shrink-0 md:hidden">
+				<details id="mobile-menu" class="relative shrink-0 md:hidden">
 					<summary class="flex h-10 w-10 cursor-pointer list-none flex-col items-center justify-center gap-1 rounded-lg border border-slate-300 bg-white text-slate-700 transition hover:bg-slate-50 [&::-webkit-details-marker]:hidden">
 						<span class="sr-only">Abrir menu</span>
 						<span class="block h-0.5 w-5 bg-current"></span>
@@ -224,7 +259,7 @@ const foodSpots = [
 						{menuItems.map((item) => (
 							<a
 								href={item.href}
-								class="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 hover:text-slate-900"
+								class="js-mobile-menu-link block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 hover:text-slate-900"
 							>
 								{item.label}
 							</a>
@@ -337,6 +372,48 @@ const foodSpots = [
 						<p class="mt-3 text-base text-blue-100">
 							Incluye menu completo, bebidas cafe y postre.
 						</p>
+					</div>
+					<div class="mt-12">
+						<p class="section-kicker">Opciones para ninos</p>
+						<h3 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">Menus infantiles</h3>
+						<details class="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm md:hidden">
+							<summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-base font-bold text-slate-900 [&::-webkit-details-marker]:hidden">
+								<span>Ver menus infantiles</span>
+								<span aria-hidden="true" class="text-blue-800">+</span>
+							</summary>
+							<div class="grid gap-4 border-t border-slate-200 bg-slate-50 p-4">
+								{kidsMenus.map((menu) => (
+									<article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+										<h4 class="text-2xl font-bold leading-tight text-slate-900">{menu.title}</h4>
+										<ul class="mt-4 space-y-2 text-base leading-relaxed text-slate-600">
+											{menu.items.map((item) => (
+												<li class="flex gap-2">
+													<span class="mt-2 block h-2 w-2 rounded-full bg-blue-700"></span>
+													<span>{item}</span>
+												</li>
+											))}
+										</ul>
+										<p class="mt-6 text-lg font-extrabold text-blue-800">{menu.price}</p>
+									</article>
+								))}
+							</div>
+						</details>
+						<div class="mt-8 hidden gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
+							{kidsMenus.map((menu) => (
+								<article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+									<h4 class="text-2xl font-bold leading-tight text-slate-900">{menu.title}</h4>
+									<ul class="mt-4 space-y-2 text-base leading-relaxed text-slate-600">
+										{menu.items.map((item) => (
+											<li class="flex gap-2">
+												<span class="mt-2 block h-2 w-2 rounded-full bg-blue-700"></span>
+												<span>{item}</span>
+											</li>
+										))}
+									</ul>
+									<p class="mt-6 text-lg font-extrabold text-blue-800">{menu.price}</p>
+								</article>
+							))}
+						</div>
 					</div>
 				</div>
 			</section>
@@ -497,6 +574,16 @@ const foodSpots = [
 
 		<script>
 			const copyIbanButton = document.querySelector('#copy-iban-button');
+			const mobileMenu = document.querySelector('#mobile-menu');
+			const mobileMenuLinks = document.querySelectorAll('.js-mobile-menu-link');
+
+			mobileMenuLinks.forEach((link) => {
+				link.addEventListener('click', () => {
+					if (mobileMenu instanceof HTMLDetailsElement) {
+						mobileMenu.open = false;
+					}
+				});
+			});
 
 			copyIbanButton?.addEventListener('click', async () => {
 				const iban = copyIbanButton.getAttribute('data-iban') ?? '';
