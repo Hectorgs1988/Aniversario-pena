@@ -232,6 +232,12 @@ const additionalSponsors = [
 	{ id: 14, name: '', logo: '/mundoDeportivo.png' },
 ];
 
+const institutions = [
+	{ id: 1, name: 'Diputacion de Burgos', logo: '/diputacion.png' },
+	{ id: 2, name: 'Ayuntamiento de Burgos', logo: '/ayuntamiento.png' },
+	{ id: 3, name: 'Fundacion Atapuerca', logo: '/Fundacion.jpg' }
+];
+
 ---
 
 <html lang="es">
@@ -595,16 +601,33 @@ const additionalSponsors = [
 						</div>
 					</article>
 
+					<div class="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+						<p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Instituciones</p>
+						<div class="mt-4 grid gap-4 sm:grid-cols-2">
+							{institutions.map((institution) => (
+								<article class="flex min-h-[130px] flex-col items-center justify-center rounded-xl border border-slate-200 bg-white p-4 text-center">
+									<img
+										src={institution.logo}
+										alt={`Logo ${institution.name}`}
+										class="h-16 w-auto object-contain sm:h-20"
+										loading="lazy"
+									/>
+									<p class="mt-3 text-sm font-semibold text-slate-800">{institution.name}</p>
+								</article>
+							))}
+						</div>
+					</div>
+
 					<div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 						{additionalSponsors.map((sponsor) => (
-							<article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+							<article class="rounded-2xl bg-white p-6 shadow-sm">
 								{sponsor.logo ? (
-									<div class="flex min-h-[138px] flex-col items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-center">
+									<div class="flex min-h-[138px] flex-col items-center justify-center rounded-xl bg-white px-4 text-center">
 										<img src={sponsor.logo} alt={`Logo ${sponsor.name}`} class="h-20 w-auto object-contain" loading="lazy" />
 										<p class="mt-3 text-base font-bold text-slate-800">{sponsor.name}</p>
 									</div>
 								) : (
-									<div class="flex min-h-[138px] flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 text-center">
+									<div class="flex min-h-[138px] flex-col items-center justify-center rounded-xl bg-white px-4 text-center">
 										<p class="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Logo pendiente</p>
 										<p class="mt-2 text-lg font-bold text-slate-700">{sponsor.name}</p>
 									</div>
